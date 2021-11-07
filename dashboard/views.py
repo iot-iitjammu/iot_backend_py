@@ -20,7 +20,6 @@ class PowerHistogramView(View):
                 content_type=request.content_type
             )
         except ValidationError as e:
-            print(e.json())
             return HttpResponse("Bad Request", status=400)
 
         grouped_sample = getPowerHistogram(req)
