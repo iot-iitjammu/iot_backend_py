@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.urls import path, include
-from .api.GetHistogram import PowerHistogramView
+from dashboard.views import PowerHistogramView
 
 urlpatterns = [
     path('powerHistogram/', PowerHistogramView.as_view()),
