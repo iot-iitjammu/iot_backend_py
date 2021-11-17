@@ -111,10 +111,10 @@ def GroupDailyEnergyData(samples: List[ElectricalDataSchema]) -> List[TimestampA
 
     for ts, ts_samples in tsToSampleMap.items():
 
-        avg_power = sum([sample.EnergyConsumption for sample in ts_samples]) / len(ts_samples)
+        avg_energy = sum([sample.EnergyConsumption for sample in ts_samples]) / len(ts_samples)
         grouped_data.append(TimestampAndValueObjectSchema.construct(
             Timestamp=ts,
-            Value=avg_power
+            Value=avg_energy
         ))
 
     return grouped_data
@@ -130,10 +130,10 @@ def GroupWeeklyEnergyData(samples: List[ElectricalDataSchema]) -> List[Timestamp
         tsToSampleMap[dayTS].append(sample)
 
     for ts, ts_samples in tsToSampleMap.items():
-        avg_power = sum([sample.EnergyConsumption for sample in ts_samples]) / len(ts_samples)
+        avg_energy = sum([sample.EnergyConsumption for sample in ts_samples]) / len(ts_samples)
         grouped_data.append(TimestampAndValueObjectSchema.construct(
             Timestamp=ts,
-            Value=avg_power
+            Value=avg_energy
         ))
 
     return grouped_data
@@ -149,10 +149,10 @@ def GroupMonthlyEnergyData(samples: List[ElectricalDataSchema]) -> List[Timestam
         tsToSampleMap[monthTS].append(sample)
 
     for ts, ts_samples in tsToSampleMap.items():
-        avg_power = sum([sample.EnergyConsumption for sample in ts_samples]) / len(ts_samples)
+        avg_energy = sum([sample.EnergyConsumption for sample in ts_samples]) / len(ts_samples)
         grouped_data.append(TimestampAndValueObjectSchema.construct(
             Timestamp=ts,
-            Value=avg_power
+            Value=avg_energy
         ))
 
     return grouped_data
