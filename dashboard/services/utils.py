@@ -98,3 +98,61 @@ def GroupMonthlyPowerData(samples: List[ElectricalDataSchema]) -> List[Timestamp
         ))
 
     return grouped_data
+
+
+def GroupDailyEnergyData(samples: List[ElectricalDataSchema]) -> List[TimestampAndValueObjectSchema]:
+    grouped_data = []
+
+    tsToSampleMap: DefaultDict[int, List[ElectricalDataSchema]] = defaultdict(list)
+
+    for sample in samples:
+        hourTS = GetRoundOffHourTS(sample.GenerationTimeStamp)
+        tsToSampleMap[hourTS].append(sample)
+
+    for ts, ts_samples in tsToSampleMap.items():
+
+        avg_energy = sum([sample.EnergyConsumption for sample in ts_samples]) / len(ts_samples)
+        grouped_data.append(TimestampAndValueObjectSchema.construct(
+            Timestamp=ts,
+            Value=avg_energy
+        ))
+
+    return grouped_data
+
+
+def GroupWeeklyEnergyData(samples: List[ElectricalDataSchema]) -> List[TimestampAndValueObjectSchema]:
+    grouped_data = []
+
+    tsToSampleMap: DefaultDict[int, List[ElectricalDataSchema]] = defaultdict(list)
+
+    for sample in samples:
+        dayTS = GetRoundOffDayTS(sample.GenerationTimeStamp)
+        tsToSampleMap[dayTS].append(sample)
+
+    for ts, ts_samples in tsToSampleMap.items():
+        avg_energy = sum([sample.EnergyConsumption for sample in ts_samples]) / len(ts_samples)
+        grouped_data.append(TimestampAndValueObjectSchema.construct(
+            Timestamp=ts,
+            Value=avg_energy
+        ))
+
+    return grouped_data
+
+
+def GroupMonthlyEnergyData(samples: List[ElectricalDataSchema]) -> List[TimestampAndValueObjectSchema]:
+    grouped_data = []
+
+    tsToSampleMap: DefaultDict[int, List[ElectricalDataSchema]] = defaultdict(list)
+
+    for sample in samples:
+        monthTS = GetRoundOffMonthTS(sample.GenerationTimeStamp)
+        tsToSampleMap[monthTS].append(sample)
+
+    for ts, ts_samples in tsToSampleMap.items():
+        avg_energy = sum([sample.EnergyConsumption for sample in ts_samples]) / len(ts_samples)
+        grouped_data.append(TimestampAndValueObjectSchema.construct(
+            Timestamp=ts,
+            Value=avg_energy
+        ))
+
+    return grouped_data
