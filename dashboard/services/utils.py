@@ -73,7 +73,7 @@ def GroupWeeklyPowerData(samples: List[ElectricalDataSchema]) -> List[TimestampA
 
     for ts, ts_samples in tsToSampleMap.items():
         avg_power = sum([sample.AveragePower for sample in ts_samples]) / len(ts_samples)
-        grouped_data.append(TimestampAndValueObjectSchema(
+        grouped_data.append(TimestampAndValueObjectSchema.construct(
             Timestamp=ts,
             Value=avg_power
         ))
@@ -92,7 +92,7 @@ def GroupMonthlyPowerData(samples: List[ElectricalDataSchema]) -> List[Timestamp
 
     for ts, ts_samples in tsToSampleMap.items():
         avg_power = sum([sample.AveragePower for sample in ts_samples]) / len(ts_samples)
-        grouped_data.append(TimestampAndValueObjectSchema(
+        grouped_data.append(TimestampAndValueObjectSchema.construct(
             Timestamp=ts,
             Value=avg_power
         ))
