@@ -19,12 +19,17 @@ class FetchHistogramInput(BaseModel):
 
 class ElectricalDataSchema(BaseModel):
     ClientId: str = Field(alias='client_id')
+    GenerationTimeStamp: int = Field(alias='generation_time_stamp')
     VoltageRMS: float = Field(alias='voltage_rms')
     CurrentRMS: float = Field(alias='current_rms')
+    VoltagePeak: float = Field(alias='voltage_peak')
+    CurrentPeak: float = Field(alias='current_peak')
+    Phase: float = Field(alias='phase')
+    VoltageFrequency: float = Field(alias='voltage_frequency')
     AveragePower: float = Field(alias='average_power')
     EnergyConsumption: float = Field(alias='energy_consumption')
-    GenerationTimeStamp: int = Field(alias='generation_time_stamp')
     DeleteStatus: bool = Field(alias='delete_status')
+    
 
     class Config:
         orm_mode = True
