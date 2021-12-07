@@ -41,6 +41,7 @@ DEFAULT_APPS = [
 ]
 
 CUSTOM_APPS = [
+    'corsheaders',
     'dashboard.apps.DashboardConfig'
 ] 
 
@@ -54,7 +55,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'iot_backend_py.urls'
 

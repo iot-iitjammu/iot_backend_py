@@ -43,5 +43,8 @@ class SuccessMessage(BaseModel):
     Message: str = Field(alias='message')
     Success: bool = Field(alias='success')
 
-class HistogramOutput(SuccessMessage):
+class TimeStampAndValueList(BaseModel):
     Data: List[TimestampAndValueObjectSchema] = Field(alias='data')
+
+class HistogramOutput(SuccessMessage):
+    Result: TimeStampAndValueList = Field(alias='result')
