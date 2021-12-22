@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpRequest
 from django.views import View
 from pydantic import ValidationError
 
-from dashboard.schemas import FetchHistogramInput, HistogramOutput
+from dashboard.schemas import FetchHistogramInput, HistogramOutput, TimeStampAndValueList
 from dashboard.services.GetHistogram import getPowerHistogram, getEnergyHistogram
 
 
@@ -24,10 +24,11 @@ class PowerHistogramView(View):
 
         grouped_sample = getPowerHistogram(req)
         if grouped_sample is not None:
+            sample_list = TimeStampAndValueList(data=grouped_sample)
             resp = HistogramOutput.construct(
                 Success=True,
                 Message="Successfully fetched the power histogram",
-                Data=grouped_sample
+                Result=sample_list
             )
         else:
             resp = HistogramOutput.construct(
@@ -53,10 +54,11 @@ class EnergyHistogramView(View):
         grouped_sample = getEnergyHistogram(req)
 
         if grouped_sample is not None:
+            sample_list = TimeStampAndValueList(data=grouped_sample)
             resp = HistogramOutput.construct(
                 Success=True,
                 Message="Successfully fetched the energy histogram",
-                Data=grouped_sample
+                Result=sample_list
             )
         else:
             resp = HistogramOutput.construct(
