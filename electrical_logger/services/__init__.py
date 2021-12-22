@@ -2,10 +2,21 @@ import time
 import random
 import logging
 from typing import List
+from dashboard.schemas import ElectricalDataSchema
 from dashboard.models import ElectricalData
 
 
 logger = logging.getLogger(__name__)
+
+
+def logElectricalData(data: ElectricalDataSchema):
+    try:
+        elect_data = ElectricalData(**data.dict(by_alias=True))
+        elect_data.save()
+    except Exception as e:
+        logger.error(f'Error while logging electrical data: {e}')
+        return False
+    return elect_data.id
 
 
 def populateDummyData() -> bool:

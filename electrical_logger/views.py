@@ -1,12 +1,38 @@
 import logging
 from django.http import HttpResponse, HttpRequest
 from django.views import View
+from pydantic import ValidationError
 
-from electrical_logger.services import populateDummyData, deleteElectricalData
-from dashboard.schemas import SuccessMessage
+from electrical_logger.services import populateDummyData, deleteElectricalData, logElectricalData
+from dashboard.schemas import SuccessMessage, ElectricalDataSchema
 
 
 logger = logging.getLogger(__name__)
+
+
+class LogElectricalData(View):
+    def post(self, request: HttpRequest) -> HttpResponse:
+        logger.info("Logging electrical data")
+        try:
+            req = ElectricalDataSchema.parse_raw(
+                request.body,
+                content_type=request.content_type
+            )
+        except ValidationError as e:
+            return HttpResponse("Bad Request", status=400)
+
+        if logElectricalData(req) != False:
+            resp = SuccessMessage(
+                message='Electrical data logged successfully',
+                success=True
+            )
+        else:
+            resp = SuccessMessage(
+                message='Electrical data logging failed',
+                success=False
+            )
+        
+        return HttpResponse(resp.json(by_alias=True), content_type='application/json')
 
 
 class PopulateElectricalData(View):
