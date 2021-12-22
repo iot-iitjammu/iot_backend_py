@@ -36,15 +36,15 @@ def populateDummyData() -> bool:
         v_freq = round(random.uniform(48, 51), 3)
         elec_data: ElectricalData = ElectricalData(
             client_id='test_abhis',
-            generation_time_stamp=current_time_stamp - int(i*900),
+            timestamp=current_time_stamp - int(i*900),
             voltage_rms=vrms,
             current_rms=irms,
             voltage_peak = v_peak,
             current_peak = i_peak,
             phase = phase,
             voltage_frequency = v_freq,
-            average_power=(vrms*irms)/1000,
-            energy_consumption=(vrms*irms)/4000,
+            power=(vrms*irms)/1000,
+            energy=(vrms*irms)/4000,
             delete_status=False
         )
         dummy_data.append(elec_data)

@@ -32,8 +32,8 @@ def getPowerHistogram(input_obj: FetchHistogramInput) -> List[TimestampAndValueO
         query_set = ElectricalData.objects.filter(
             client_id=input_obj.ClientId,
             delete_status=not True,
-            generation_time_stamp__gte=input_obj.FromTimeStamp,
-            generation_time_stamp__lt=input_obj.ToTimeStamp
+            timestamp__gte=input_obj.FromTimeStamp,
+            timestamp__lt=input_obj.ToTimeStamp
         )
     except Exception as e:
         logger.error(f'FetchPowerHistogram Error: {e}')       
@@ -76,8 +76,8 @@ def getEnergyHistogram(input_obj: FetchHistogramInput) -> List[TimestampAndValue
         query_set = ElectricalData.objects.filter(
             client_id=input_obj.ClientId,
             delete_status=not True,
-            generation_time_stamp__gte=input_obj.FromTimeStamp,
-            generation_time_stamp__lt=input_obj.ToTimeStamp
+            timestamp__gte=input_obj.FromTimeStamp,
+            timestamp__lt=input_obj.ToTimeStamp
         )
     except Exception as e:
         logger.error(f'FetchEnergyHistogram Error: {e}')       
