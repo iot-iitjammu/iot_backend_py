@@ -1,9 +1,11 @@
-from django.db import models
+# from django.db import models
+from mongoengine import Document
+import mongoengine.fields as models
 
 # Create your models here.
-class ElectricalData(models.Model):
-    client_id = models.CharField(max_length=100)
-    generation_time_stamp = models.IntegerField()
+class ElectricalData(Document):
+    client_id = models.StringField()
+    generation_time_stamp = models.IntField()
     voltage_rms = models.FloatField()
     current_rms = models.FloatField()
     voltage_peak = models.FloatField()

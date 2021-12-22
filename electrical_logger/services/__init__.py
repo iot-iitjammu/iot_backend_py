@@ -50,7 +50,7 @@ def populateDummyData() -> bool:
         dummy_data.append(elec_data)
 
     try:
-        ElectricalData.objects.bulk_create(dummy_data)
+        ElectricalData.objects.insert(dummy_data)  # mongoengine.bulk_write
     except Exception as e:
         logger.error(f'Error while populating dummy data: {e}')
         return False

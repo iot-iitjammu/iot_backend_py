@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('iot-backend/v0/', include('dashboard.urls')),
     path('iot-backend/v0/', include('electrical_logger.urls')),
+    path('iot-backend/v0/', include('devices.urls')),
 ]
