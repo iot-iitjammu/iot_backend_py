@@ -37,7 +37,7 @@ class LogElectricalData(View):
 
 class PopulateElectricalData(View):
 
-    def get(self, request: HttpRequest) -> HttpResponse:
+    def post(self, request: HttpRequest) -> HttpResponse:
         logger.info('Populating electrical data')
         if populateDummyData():
             resp = SuccessMessage(

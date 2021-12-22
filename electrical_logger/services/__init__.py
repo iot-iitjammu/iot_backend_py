@@ -20,7 +20,7 @@ def logElectricalData(data: ElectricalDataSchema):
 
 
 def populateDummyData() -> bool:
-    total_days: int = 400
+    total_days: int = 100
     samples_per_day: int = 96
 
     current_time_stamp: int = int(time.time())
@@ -35,7 +35,7 @@ def populateDummyData() -> bool:
         phase = round(random.uniform(0.555, 0.723), 3)
         v_freq = round(random.uniform(48, 51), 3)
         elec_data: ElectricalData = ElectricalData(
-            client_id='palak',
+            client_id='test_abhis',
             generation_time_stamp=current_time_stamp - int(i*900),
             voltage_rms=vrms,
             current_rms=irms,
