@@ -1,7 +1,6 @@
 import logging
 from django.http import HttpResponse, HttpRequest
 from django.views import View
-from pydantic.main import BaseModel
 
 from .services.deviceStatus import getAllDeviceStatus
 from .schemas import DataMessageSchema, ReponseSchema, DeviceStatusRequestSchema
@@ -18,11 +17,11 @@ class DeviceStatus(View):
         logger.info("DeviceStatusView called")
 
         allClients = getAllDeviceStatus(parsedReq.from_ts, parsedReq.to_ts)
-        
+
         resp = ReponseSchema.construct(
             success=True,
             result=DataMessageSchema.construct(
-                data=list(allClients.values()),
+                data=list(allClients),
                 message="Successfully fetched the device status"
             )
         )

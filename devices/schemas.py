@@ -1,6 +1,7 @@
 from typing import List
 from pydantic import BaseModel, Field
 
+
 class DeviceStatusSchema(BaseModel):
     ClientId: str = Field(alias='client_id')
     ClientName: str = Field(alias='client_name')
@@ -20,4 +21,3 @@ class DataMessageSchema(BaseModel):
 class ReponseSchema(BaseModel):
     success: str
     result: DataMessageSchema
-
